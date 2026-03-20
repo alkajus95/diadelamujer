@@ -60,9 +60,9 @@
 <body>
 
     <header>
-        <p class="subtitle">Promo 2026 | 11B</p>
+        <p class="subtitle">Promo Astra 2026 | 11B</p>
         <h1>Las Mujeres.</h1>
-        <p style="max-width: 500px; margin-top: 20px;">Celebrando la esencia de las compañeras que hacen de 11B el mejor grado.</p>
+        <p style="max-width: 500px; margin-top: 20px;">Celebrando la esencia de las compañeras que hacen de 11B el mejor salón.</p>
         <a href="#trivia" style="margin-top: 30px; text-decoration: none; color: var(--deep-rose); border: 1px solid var(--deep-rose); padding: 12px 25px; border-radius: 50px; font-weight: 600; transition: 0.3s;">Ir al Kahoot de 11B</a>
     </header>
 
@@ -153,23 +153,22 @@
         </div>
     </section>
 
-    <footer>Promo 2026 | Hecho para 11B ✨</footer>
+    <footer>Promo Astra 2026 | Hecho para 11B ✨</footer>
 
     <script>
         const questions = [
-            { q: "¿Quién tiene las mejores notas de todo el salón y es nuestra Personera?", a: ["Sofia", "Lina", "Ana", "Isabella"], c: 1 },
             { q: "¿Quién es la 'mejor amiga' de Henry Vargas (en tono muy irónico)?", a: ["Valerie", "Natalia", "Emily", "Andrea"], c: 2 },
-            { q: "¿A quién quieren alejar de Emily para que no hagan tanta recocha?", a: ["Ana", "Valerie", "Gabriella", "Sofia"], c: 1 },
-            { q: "¿Quién es la mejor delegada del grado y siempre está alegre?", a: ["Isabella", "Lina", "Carolina", "Valenthina"], c: 0 },
-            { q: "¿Quién es la bailarina enfocada y muy colaboradora?", a: ["Emily", "Geraldine", "Gabriella", "Sofia"], c: 2 },
-            { q: "Sofia se destaca en el salón por ser:", a: ["La más recochera", "Dedicada y con buenas notas", "La bailarina principal", "La delegada"], c: 1 },
-            { q: "¿Quién es muy graciosa y se preocupa por los demás?", a: ["Natalia", "Lina", "Ana", "Carolina"], c: 2 },
-            { q: "¿Quién es sociable y una súper persona según quienes la conocen?", a: ["Geraldine", "Natalia", "Andrea", "Valenthina"], c: 1 },
-            { q: "Geraldine y Carolina comparten esta descripción:", a: ["Son las más gritonas", "Son las que bailan", "Calladas pero excelentes personas", "Son las personeras"], c: 2 },
-            { q: "¿Quién es nuestra Personera?", a: ["Ana", "Isabella", "Lina", "Sofia"], c: 2 },
-            { q: "¿Quién es la que aporta la visión creativa y detallista?", a: ["Andrea", "Emily", "Natalia", "Valerie"], c: 0 },
-            { q: "¿Quién es tímida pero una persona sumamente noble?", a: ["Emily", "Valenthina", "Lina", "Gabriella"], c: 1 },
-            { q: "¿Quién es el alma de la recocha en 11B?", a: ["Carolina", "Geraldine", "Sofia", "Valerie"], c: 3 },
+            { q: "¿Quién es nuestra Personera y tiene las mejores notas del salón?", a: ["Sofia", "Ana", "Lina", "Isabella"], c: 2 },
+            { q: "¿A quién el salón considera una 'súper persona' sociable y leal?", a: ["Geraldine", "Natalia", "Andrea", "Valenthina"], c: 1 },
+            { q: "¿Quién se destaca por ser dedicada, constante y tener muy buenas notas?", a: ["Emily", "Sofia", "Isabella", "Valerie"], c: 1 },
+            { q: "¿Quién es la bailarina enfocada, dedicada y muy colaboradora?", a: ["Gabriella", "Ana", "Lina", "Carolina"], c: 0 },
+            { q: "¿Quién es graciosa y se preocupa genuinamente por los demás?", a: ["Emily", "Geraldine", "Ana", "Isabella"], c: 2 },
+            { q: "¿Quién es la mejor delegada del grado, siempre alegre y feliz?", a: ["Isabella", "Lina", "Sofia", "Andrea"], c: 0 },
+            { q: "¿A quién quieren alejar de Emily para evitar que el salón se descontrole?", a: ["Natalia", "Valerie", "Gabriella", "Carolina"], c: 1 },
+            { q: "¿Quién es callada pero una excelente persona en quien confiar?", a: ["Ana", "Geraldine", "Isabella", "Emily"], c: 1 },
+            { q: "¿Quién aporta la visión creativa y detallista al grado?", a: ["Andrea", "Sofia", "Lina", "Natalia"], c: 0 },
+            { q: "¿Quién es de pocas palabras, noble y representa la serenidad?", a: ["Gabriella", "Carolina", "Valerie", "Ana"], c: 1 },
+            { q: "¿Quién es tímida pero profundamente buena persona y noble?", a: ["Isabella", "Valenthina", "Lina", "Emily"], c: 1 },
             { q: "¿Cuál es el mejor salón de la Promo Astra 2026?", a: ["11A", "11C", "11B", "Ninguno"], c: 2 }
         ];
 
@@ -178,7 +177,7 @@
         function startTimer() {
             timerWidth = 100; clearInterval(timerInterval);
             timerInterval = setInterval(() => {
-                timerWidth -= 0.3; // Tiempo extendido (aprox 33 segundos por pregunta)
+                timerWidth -= 0.3; 
                 document.getElementById('timer').style.width = timerWidth + "%";
                 if (timerWidth <= 0) nextQuestion();
             }, 100);
@@ -211,7 +210,8 @@
             } else {
                 clearInterval(timerInterval);
                 document.getElementById('quiz-box').style.display = 'none';
-                document.getElementById('results-box').style.display = 'block';
+                const resultsBox = document.getElementById('results-box');
+                resultsBox.style.display = 'block';
                 document.getElementById('final-score').innerText = score;
                 confetti({ particleCount: 300, spread: 160, origin: { y: 0.6 } });
             }
