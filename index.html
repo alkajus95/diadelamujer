@@ -3,116 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>11B | The Women of 2026</title>
+    <title>11B | Dia de la mujer</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:italic,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --bg: #fffbfb;
             --soft-pink: #f7ede2;
-            --deep-rose: #d68d90; /* Un rosa más profundo y elegante */
+            --deep-rose: #d68d90;
             --gray-text: #5e5e5e;
             --black-text: #2c2c2c;
+            --k-red: #e21b3c;
+            --k-blue: #1368ce;
+            --k-yellow: #d89e00;
+            --k-green: #26890c;
+            --k-purple: #46178f;
         }
 
         * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--gray-text); overflow-x: hidden; scroll-behavior: smooth; }
 
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--gray-text);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        /* --- Hero Section --- */
-        header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, var(--bg) 0%, #fae1e4 100%);
-        }
-
-        h1 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 5rem; 
-            margin: 0; 
-            font-style: italic; 
-            color: var(--deep-rose);
-        }
-
+        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; background: linear-gradient(135deg, var(--bg) 0%, #fae1e4 100%); }
+        h1 { font-family: 'Playfair Display', serif; font-size: 5rem; margin: 0; font-style: italic; color: var(--deep-rose); animation: fadeIn 1.5s ease; }
         .subtitle { font-size: 1rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; opacity: 0.7; }
 
-        /* --- Galería de Mujeres --- */
-        .gallery-section {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .gallery-section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; }
+        .woman-card { background: #ffffff; border-radius: 20px; padding: 40px; border: 1px solid #f0f0f0; transition: all 0.4s ease; position: relative; overflow: hidden; animation: slideUp 1s ease; }
+        .woman-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(214, 141, 144, 0.15); border-color: var(--soft-pink); }
+        .woman-name { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--black-text); margin: 0 0 15px 0; }
+        .woman-desc { font-size: 1rem; line-height: 1.6; font-weight: 300; }
+        .highlight { color: var(--deep-rose); font-weight: 600; }
+        .card-decor { position: absolute; top: -10px; right: -10px; font-size: 5rem; font-family: 'Playfair Display', serif; color: var(--soft-pink); opacity: 0.4; font-style: italic; }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        /* Tarjeta de cada mujer */
-        .woman-card {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 40px;
-            border: 1px solid #f0f0f0;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .woman-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.03);
-            border-color: var(--soft-pink);
-        }
-
-        .woman-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--black-text);
-            margin: 0 0 15px 0;
-        }
-
-        .woman-desc {
-            font-size: 1rem;
-            line-height: 1.6;
-            font-weight: 300;
-        }
-
-        .highlight {
-            color: var(--deep-rose);
-            font-weight: 600;
-        }
-
-        /* Toque decorativo sutil */
-        .card-decor {
-            position: absolute;
-            top: -10px; right: -10px;
-            font-size: 5rem;
-            font-family: 'Playfair Display', serif;
-            color: var(--soft-pink);
-            opacity: 0.4;
-            font-style: italic;
-        }
-
-        footer {
-            text-align: center;
-            padding: 60px;
-            font-size: 0.8rem;
-            opacity: 0.5;
-            letter-spacing: 2px;
-        }
+        /* --- KAHOOT SECTION --- */
+        .kahoot-container { background-color: var(--k-purple); padding: 80px 20px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
+        .quiz-card { background: white; width: 100%; max-width: 900px; border-radius: 20px; padding: 40px; color: var(--black-text); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; }
+        .question-header { font-size: 2.2rem; font-weight: 700; margin-bottom: 30px; min-height: 80px; }
+        .timer-bar { width: 100%; height: 12px; background: #eee; border-radius: 6px; margin-bottom: 30px; overflow: hidden; }
+        .timer-fill { height: 100%; background: var(--k-blue); width: 100%; transition: width 0.1s linear; }
+        .answers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .answer-btn { padding: 25px; border: none; border-radius: 12px; color: white; font-size: 1.3rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 15px; transition: transform 0.2s, opacity 0.2s; }
+        .answer-btn:hover { opacity: 0.9; transform: scale(1.02); }
+        .btn-red { background: var(--k-red); } .btn-blue { background: var(--k-blue); } .btn-yellow { background: var(--k-yellow); } .btn-green { background: var(--k-green); }
+        .shape { width: 30px; height: 30px; background: rgba(255,255,255,0.3); }
+        .triangle { clip-path: polygon(50% 0%, 0% 100%, 100% 100%); } .diamond { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); } .circle { border-radius: 50%; } .square { border-radius: 4px; }
+        .score-board { margin-top: 25px; font-weight: 800; font-size: 1.5rem; color: var(--k-purple); }
+        .results-screen { display: none; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .shake { animation: shake 0.4s ease-in-out; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+        footer { text-align: center; padding: 60px; font-size: 0.8rem; opacity: 0.5; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -120,90 +62,160 @@
     <header>
         <p class="subtitle">Promo 2026 | 11B</p>
         <h1>Las Mujeres.</h1>
-        <p style="max-width: 500px; margin-top: 20px;">Una pausa para celebrar el talento, la alegría y la esencia que cada una aporta a nuestro salón. Este es su espacio.</p>
+        <p style="max-width: 500px; margin-top: 20px;">Celebrando la esencia de las compañeras que hacen de 11B el mejor grado.</p>
+        <a href="#trivia" style="margin-top: 30px; text-decoration: none; color: var(--deep-rose); border: 1px solid var(--deep-rose); padding: 12px 25px; border-radius: 50px; font-weight: 600; transition: 0.3s;">Ir al Kahoot de 11B</a>
     </header>
 
     <section class="gallery-section">
         <div class="gallery-grid">
-
             <div class="woman-card">
                 <div class="card-decor">e</div>
                 <h3 class="woman-name">Emily</h3>
-                <p class="woman-desc">La <span class="highlight">alegría contagiosa</span> de 11B. Con una energía inigualable, Emily ilumina cualquier espacio. Es esa amiga incondicional (la dupla perfecta con Henry Vargas) que siempre tiene una sonrisa lista.</p>
+                <p class="woman-desc">La <span class="highlight">alegría contagiosa</span>. Super divertida e icónica por ser la "mejor amiga" de Henry Vargas (claramente en tono irónico). Siempre lista para la recocha.</p>
             </div>
-
-            <div class="woman-card">
-                <div class="card-decor">n</div>
-                <h3 class="woman-name">Natalia</h3>
-                <p class="woman-desc"><span class="highlight">Carisma natural</span>. Natalia destaca por ser increíblemente sociable y abierta, conectando fácilmente con todos. Quienes tienen la suerte de conocerla de verdad saben que detrás de su sonrisa hay una súper persona, leal y llena de bondad, que enriquece nuestro salón.</p>
-            </div>
-
-            <div class="woman-card">
-                <div class="card-decor">g</div>
-                <h3 class="woman-name">Geraldine</h3>
-                <p class="woman-desc">Geraldine destaca por ser la <span class="highlight">fuerza silenciosa</span> del grupo. Aunque callada, su presencia es reconfortante y su amabilidad genuina la convierte en una persona realmente 'buena gente' en quien confiar.</p>
-            </div>
-
-            <div class="woman-card">
-                <div class="card-decor">g</div>
-                <h3 class="woman-name">Gabriella</h3>
-                <p class="woman-desc">Gabriella es pasión y disciplina. <span class="highlight">Bailarina talentosa</span> que lleva el ritmo en el alma. Su enfoque y espíritu colaborador son un ejemplo constante de dedicación para todo el grupo.</p>
-            </div>
-
-            <div class="woman-card">
-                <div class="card-decor">a</div>
-                <h3 class="woman-name">Ana</h3>
-                <p class="woman-desc">Ana es la risa necesaria y el corazón empático del salón. Con un <span class="highlight">humor único</span> que alegra el día, Ana se destaca por su genuina preocupación por el bienestar de todos.</p>
-            </div>
-
             <div class="woman-card">
                 <div class="card-decor">l</div>
                 <h3 class="woman-name">Lina</h3>
-                <p class="woman-desc">Nuestra <span class="highlight">Personera</span>. Lina lidera con determinación y nos representa con orgullo. Su compromiso con el grado es fundamental y su voz es la voz de todas.</p>
+                <p class="woman-desc">Nuestra <span class="highlight">Personera estrella</span>. Destaca no solo por su liderazgo, sino por tener las mejores notas del salón. Una combinación de enfoque y excelencia.</p>
             </div>
-
             <div class="woman-card">
-                <div class="card-decor">i</div>
-                <h3 class="woman-name">Isabella</h3>
-                <p class="woman-desc">Isabella, la <span class="highlight">mejor delegada</span>. Organizada, eficiente y, sobre todo, increíblemente alegre. Su felicidad constante es un motor para la buena energía de 11B.</p>
+                <div class="card-decor">n</div>
+                <h3 class="woman-name">Natalia</h3>
+                <p class="woman-desc"><span class="highlight">Sociable y leal</span>. Natalia conecta con todos; quienes la conocen de verdad saben que es una súper persona, llena de bondad y carisma.</p>
             </div>
-
-            <div class="woman-card">
-                <div class="card-decor">v</div>
-                <h3 class="woman-name">Valerie</h3>
-                <p class="woman-desc">Valerie, el <span class="highlight">alma de la recocha</span>. Divertida e impredecible. Aunque algunos traten de separarla de Emily por el caos que arman juntas, ¡nos encanta su esencia vibrante!</p>
-            </div>
-
-            <div class="woman-card">
-                <div class="card-decor">a</div>
-                <h3 class="woman-name">Andrea</h3>
-                <p class="woman-desc">Andrea posee una <span class="highlight">visión única del mundo</span>. Creativa y detallista, su aporte artístico y su sensibilidad aportan una perspectiva diferente y valiosa a nuestro grado.</p>
-            </div>
-
-            <div class="woman-card">
-                <div class="card-decor">c</div>
-                <h3 class="woman-name">Carolina</h3>
-                <p class="woman-desc">Carolina es la <span class="highlight">serenidad del grupo</span>. Una buena persona en toda la extensión de la palabra. Su calma y dulzura son un refugio necesario en medio del ajetreo escolar.</p>
-            </div>
-
             <div class="woman-card">
                 <div class="card-decor">s</div>
                 <h3 class="woman-name">Sofia</h3>
-                <p class="woman-desc"><span class="highlight">Mente brillante</span> de 11B. Sofia es super inteligente, curiosa y capaz de resolver cualquier reto académico. Su intelecto es admirado por todos y un gran aporte al salón.</p>
+                <p class="woman-desc"><span class="highlight">Dedicada y constante</span>. Sofia se destaca por su compromiso con el estudio, logrando siempre muy buenas notas gracias a su esfuerzo y disciplina diaria.</p>
             </div>
-
+            <div class="woman-card">
+                <div class="card-decor">g</div>
+                <h3 class="woman-name">Gabriella</h3>
+                <p class="woman-desc"><span class="highlight">Bailarina enfocada</span>. Muy colaboradora y dedicada, Gabriella pone su pasión en todo lo que hace, siendo un gran apoyo para el grupo.</p>
+            </div>
+            <div class="woman-card">
+                <div class="card-decor">a</div>
+                <h3 class="woman-name">Ana</h3>
+                <p class="woman-desc">El <span class="highlight">corazón del humor</span>. Graciosa por naturaleza, pero con la gran cualidad de preocuparse genuinamente por el bienestar de los demás.</p>
+            </div>
+            <div class="woman-card">
+                <div class="card-decor">i</div>
+                <h3 class="woman-name">Isabella</h3>
+                <p class="woman-desc"><span class="highlight">Mejor delegada</span>. Alegre, feliz y sumamente eficiente. Su energía positiva es el motor que mantiene unido a 11B.</p>
+            </div>
+            <div class="woman-card">
+                <div class="card-decor">v</div>
+                <h3 class="woman-name">Valerie</h3>
+                <p class="woman-desc"><span class="highlight">Recochera oficial</span>. Su diversión no tiene límites, tanto que a veces intentan alejarla de Emily para que el salón no se descontrole.</p>
+            </div>
+            <div class="woman-card">
+                <div class="card-decor">g</div>
+                <h3 class="woman-name">Geraldine</h3>
+                <p class="woman-desc">La <span class="highlight">amabilidad silenciosa</span>. Callada pero excelente persona; Geraldine es ese apoyo constante y 'buena gente' en quien se puede confiar.</p>
+            </div>
+            <div class="woman-card">
+                <div class="card-decor">a</div>
+                <h3 class="woman-name">Andrea</h3>
+                <p class="woman-desc"><span class="highlight">Visión creativa</span>. Detallista y auténtica, Andrea aporta esa sensibilidad única y diferente que equilibra la dinámica de nuestro grado.</p>
+            </div>
+            <div class="woman-card">
+                <div class="card-decor">c</div>
+                <h3 class="woman-name">Carolina</h3>
+                <p class="woman-desc"><span class="highlight">Serenidad noble</span>. De pocas palabras pero de gran corazón. Carolina es una excelente persona cuya calma es necesaria en el salón.</p>
+            </div>
             <div class="woman-card">
                 <div class="card-decor">v</div>
                 <h3 class="woman-name">Valenthina</h3>
-                <p class="woman-desc">Valenthina, de <span class="highlight">timidez encantadora</span> y gran corazón. Detrás de su perfil bajo hay una persona noble y buena, cuya dulzura se gana el cariño de quien se detiene a conocerla.</p>
+                <p class="woman-desc"><span class="highlight">Dulzura reservada</span>. Tímida pero profundamente buena persona. Su nobleza se siente en cada pequeño gesto hacia sus compañeras.</p>
             </div>
-
         </div>
     </section>
 
-    <footer>
-        Hecho con ✨ para las mujeres de 11B. Promo 2026.
-    </footer>
+    <section class="kahoot-container" id="trivia">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 20px;">11B Challenge 🎮</h2>
+        <div class="quiz-card" id="quiz-box">
+            <div class="timer-bar"><div class="timer-fill" id="timer"></div></div>
+            <div class="question-header" id="question">¿Preparadas para la trivia del salón?</div>
+            <div class="answers-grid" id="answers">
+                <button class="answer-btn btn-red" onclick="selectAnswer(0)"><div class="shape triangle"></div> <span id="opt0">¡Vamos!</span></button>
+                <button class="answer-btn btn-blue" onclick="selectAnswer(1)"><div class="shape diamond"></div> <span id="opt1">¡Listas!</span></button>
+                <button class="answer-btn btn-yellow" onclick="selectAnswer(2)"><div class="shape circle"></div> <span id="opt2">¡Dale!</span></button>
+                <button class="answer-btn btn-green" onclick="selectAnswer(3)"><div class="shape square"></div> <span id="opt3">¡Ready!</span></button>
+            </div>
+            <div class="score-board">PUNTOS: <span id="score">0</span></div>
+        </div>
 
+        <div class="quiz-card results-screen" id="results-box">
+            <h2 style="font-size: 3rem; color: var(--k-purple);">¡Fin del Juego! 👑</h2>
+            <p style="font-size: 2rem;">Puntaje Final: <span id="final-score">0</span></p>
+            <p>Ustedes hacen que 11B sea inolvidable.</p>
+            <button onclick="location.reload()" style="padding: 15px 30px; border: none; background: var(--k-purple); color: white; cursor: pointer; font-weight: bold; border-radius: 10px;">Reiniciar</button>
+        </div>
+    </section>
+
+    <footer>Promo 2026 | Hecho para 11B ✨</footer>
+
+    <script>
+        const questions = [
+            { q: "¿Quién tiene las mejores notas de todo el salón y es nuestra Personera?", a: ["Sofia", "Lina", "Ana", "Isabella"], c: 1 },
+            { q: "¿Quién es la 'mejor amiga' de Henry Vargas (en tono muy irónico)?", a: ["Valerie", "Natalia", "Emily", "Andrea"], c: 2 },
+            { q: "¿A quién quieren alejar de Emily para que no hagan tanta recocha?", a: ["Ana", "Valerie", "Gabriella", "Sofia"], c: 1 },
+            { q: "¿Quién es la mejor delegada del grado y siempre está alegre?", a: ["Isabella", "Lina", "Carolina", "Valenthina"], c: 0 },
+            { q: "¿Quién es la bailarina enfocada y muy colaboradora?", a: ["Emily", "Geraldine", "Gabriella", "Sofia"], c: 2 },
+            { q: "Sofia se destaca en el salón por ser:", a: ["La más recochera", "Dedicada y con buenas notas", "La bailarina principal", "La delegada"], c: 1 },
+            { q: "¿Quién es muy graciosa y se preocupa por los demás?", a: ["Natalia", "Lina", "Ana", "Carolina"], c: 2 },
+            { q: "¿Quién es sociable y una súper persona según quienes la conocen?", a: ["Geraldine", "Natalia", "Andrea", "Valenthina"], c: 1 },
+            { q: "Geraldine y Carolina comparten esta descripción:", a: ["Son las más gritonas", "Son las que bailan", "Calladas pero excelentes personas", "Son las personeras"], c: 2 },
+            { q: "¿Quién es nuestra Personera?", a: ["Ana", "Isabella", "Lina", "Sofia"], c: 2 },
+            { q: "¿Quién es la que aporta la visión creativa y detallista?", a: ["Andrea", "Emily", "Natalia", "Valerie"], c: 0 },
+            { q: "¿Quién es tímida pero una persona sumamente noble?", a: ["Emily", "Valenthina", "Lina", "Gabriella"], c: 1 },
+            { q: "¿Quién es el alma de la recocha en 11B?", a: ["Carolina", "Geraldine", "Sofia", "Valerie"], c: 3 },
+            { q: "¿Cuál es el mejor salón de la Promo Astra 2026?", a: ["11A", "11C", "11B", "Ninguno"], c: 2 }
+        ];
+
+        let currentQ = -1; let score = 0; let timerWidth = 100; let timerInterval;
+
+        function startTimer() {
+            timerWidth = 100; clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timerWidth -= 0.3; // Tiempo extendido (aprox 33 segundos por pregunta)
+                document.getElementById('timer').style.width = timerWidth + "%";
+                if (timerWidth <= 0) nextQuestion();
+            }, 100);
+        }
+
+        function selectAnswer(index) {
+            if (currentQ === -1) { nextQuestion(); return; }
+            const isCorrect = index === questions[currentQ].c;
+            const card = document.getElementById('quiz-box');
+            if (isCorrect) {
+                score += 100 + Math.round(timerWidth);
+                document.getElementById('score').innerText = score;
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            } else {
+                card.classList.add('shake');
+                setTimeout(() => card.classList.remove('shake'), 400);
+            }
+            setTimeout(nextQuestion, 600);
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if (currentQ < questions.length) {
+                document.getElementById('question').innerText = questions[currentQ].q;
+                document.getElementById('opt0').innerText = questions[currentQ].a[0];
+                document.getElementById('opt1').innerText = questions[currentQ].a[1];
+                document.getElementById('opt2').innerText = questions[currentQ].a[2];
+                document.getElementById('opt3').innerText = questions[currentQ].a[3];
+                startTimer();
+            } else {
+                clearInterval(timerInterval);
+                document.getElementById('quiz-box').style.display = 'none';
+                document.getElementById('results-box').style.display = 'block';
+                document.getElementById('final-score').innerText = score;
+                confetti({ particleCount: 300, spread: 160, origin: { y: 0.6 } });
+            }
+        }
+    </script>
 </body>
 </html>
